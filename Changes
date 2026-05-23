@@ -1,6 +1,8 @@
 Revision history for {{ $dist->name }}:
 
 {{$NEXT}}
+
+0.02      2026-05-23 16:31:44+01:00 Europe/London
   [Tests]
   - Changed Crypt::SaltedHash to be an optional prerequisite.
 
