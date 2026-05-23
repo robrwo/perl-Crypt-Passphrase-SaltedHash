@@ -2,8 +2,8 @@ use Test2::V0;
 
 use Crypt::Passphrase::SaltedHash;
 
-use Digest::MD5 ();
-use Digest::SHA ();
+use Digest::MD5 2.25 ();
+use Digest::SHA 5.96 ();
 
 ok my $validator = Crypt::Passphrase::SaltedHash->new;
 

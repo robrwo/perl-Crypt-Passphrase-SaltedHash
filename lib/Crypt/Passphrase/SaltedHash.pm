@@ -1,16 +1,24 @@
 package Crypt::Passphrase::SaltedHash;
 
-$Crypt::Passphrase::SaltedHash::VERSION = '0.01';
+use v5.6;
 
 use strict;
 use warnings;
 
 use parent 'Crypt::Passphrase::Validator';
 
-use Digest       ();
+use Digest 1.19  ();
 use MIME::Base64 ();
 
+our $VERSION = '0.01';
+
 # ABSTRACT: Validate against Crypt::SaltedHash hashes with Crypt::Passphrase
+
+=begin :prelude
+
+=for stopwords validator
+
+=end :prelude
 
 =head1 SYNOPSIS
 
@@ -75,7 +83,7 @@ sub verify_password {
     my ( $has_salt, $alg ) = $hash =~ /^\{(S)?(\w+)\}/ or return;
     my $meta = $DIGESTS{ uc $alg } or return;
 
-    my $name   = $meta->[1] // $alg;
+    my $name   = $meta->[1] || $alg;
     my $bytes  = $meta->[0] / 8;
     my $digest = Digest->new($name);
     my $bin    = MIME::Base64::decode_base64( substr( $hash, length($alg) + 2 + ( $has_salt ? 1 : 0 ) ) );
