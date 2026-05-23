@@ -1,0 +1,5 @@
+Crypt-Passphrase-SaltedHash-*/
+Crypt-Passphrase-SaltedHash-*.tar.gz
+.build/
+tmp/
+local/
