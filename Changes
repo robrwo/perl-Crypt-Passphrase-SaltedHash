@@ -1,6 +1,9 @@
 Revision history for {{ $dist->name }}:
 
 {{$NEXT}}
+  [Bug Fixes]
+  - Handle hashes without salts.
+
   [Documentation]
   - Amended Changes.
 

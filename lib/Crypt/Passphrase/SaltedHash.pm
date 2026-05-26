@@ -58,6 +58,8 @@ my  %DIGESTS = (
     SHA512  => [ 512, "SHA-512" ],
 );
 
+my $ALGS = join( "|", keys %DIGESTS );
+
 =for Pod::Coverage new
 
 =for Pod::Coverage accepts_hash
@@ -73,14 +75,14 @@ sub new {
 
 sub accepts_hash {
     my ( $self,     $hash ) = @_;
-    my ( $has_salt, $alg )  = $hash =~ /^\{(S)?(\w+)\}/ or return;
+    my ( $has_salt, $alg )  = $hash =~ /^\{(S)?(${ALGS})\}/ or return;
     return exists $DIGESTS{ uc $alg };
 }
 
 sub verify_password {
     my ( $self, $password, $hash ) = @_;
 
-    my ( $has_salt, $alg ) = $hash =~ /^\{(S)?(\w+)\}/ or return;
+    my ( $has_salt, $alg ) = $hash =~ /^\{(S)?(${ALGS})\}/ or return;
     my $meta = $DIGESTS{ uc $alg } or return;
 
     my $name   = $meta->[1] || $alg;
